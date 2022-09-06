@@ -1,9 +1,20 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const db = require('../postgresDB');
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.route('/')
+.all((req, res, next) => {
+  res.set('Content-Type', 'application/json');
+  res.statusCode = 200;
+  next();
+})
+.post(postFunction)
+.get(async (req, res, next) => {
+  res.send({status:"server running"});
 });
+
+async function postFunction(req, res, next){
+  res.send(req.body);
+}
 
 module.exports = router;
