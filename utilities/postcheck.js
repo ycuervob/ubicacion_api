@@ -28,7 +28,7 @@ async function postFunction(req, res, next) {
         const res_db = await new Promise((resolve, reject) => {
             db.query(
                 insertText,
-                [id_device, bateria, temperatura, humedad, flat, flon, timestamp, numero_satelites, varianza],
+                [id_device, bateria, temperatura, humedad, flat, flon, newTimestamp, numero_satelites, varianza],
                 (err, res1) => { if (err) resolve(err); else resolve(res1); }
             );
         });
