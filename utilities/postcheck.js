@@ -18,9 +18,7 @@ async function postFunction(req, res, next) {
 
     const [id_device, bateria, temperatura, humedad, flat, flon, timestamp, numero_satelites, varianza] = req.body?.lista;
     var fecha = new Date(timestamp + "UTC+5");
-    var newTimestamp = fecha.toLocaleString("en-GB").replace(",", "");
-    console.error(newTimestamp);
-    const data = [id_device, bateria, temperatura, humedad, flat, flon, newTimestamp, numero_satelites, varianza];
+    const data = [id_device, bateria, temperatura, humedad, flat, flon, fecha, numero_satelites, varianza];
 
     if (data?.every(element => !(element == null)) == true) {
 
@@ -28,7 +26,7 @@ async function postFunction(req, res, next) {
         const res_db = await new Promise((resolve, reject) => {
             db.query(
                 insertText,
-                [id_device, bateria, temperatura, humedad, flat, flon, newTimestamp, numero_satelites, varianza],
+                [id_device, bateria, temperatura, humedad, flat, flon, fecha, numero_satelites, varianza],
                 (err, res1) => { if (err) resolve(err); else resolve(res1); }
             );
         });
