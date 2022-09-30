@@ -16,8 +16,8 @@ async function postFunction(req, res, next) {
         return res.send({});
     }
 
-
     const [id_device, bateria, temperatura, humedad, flat, flon, timestamp, numero_satelites, varianza] = req.body?.lista;
+    var fecha = new Date(timestamp+"UTC+5");
     const data = [id_device, bateria, temperatura, humedad, flat, flon, timestamp, numero_satelites, varianza];
 
     if (data?.every(element => !(element == null)) == true) {
