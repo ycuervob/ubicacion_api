@@ -18,8 +18,9 @@ async function postFunction(req, res, next) {
 
     const [id_device, bateria, temperatura, humedad, flat, flon, timestamp, numero_satelites, varianza] = req.body?.lista;
     var fecha = new Date(timestamp + "UTC+5");
-    console.error(fecha);
-    const data = [id_device, bateria, temperatura, humedad, flat, flon, timestamp, numero_satelites, varianza];
+    var newTimestamp = fecha.toLocaleString("en-GB").replace(",", "");
+    console.error(newTimestamp);
+    const data = [id_device, bateria, temperatura, humedad, flat, flon, newTimestamp, numero_satelites, varianza];
 
     if (data?.every(element => !(element == null)) == true) {
 
