@@ -23,7 +23,13 @@ async function postFunction(req, res, next) {
     if (data?.every(element => !(element == null)) == true) {
 
         const insertText = 'CALL public.insertarlectura($1,$2,$3,$4,$5,$6,$7,$8,$9);';
-        const res_db = await db.query(insertText, [id_device, bateria, temperatura, humedad, flat, flon, timestamp, numero_satelites, varianza]);
+        const res_db = await new Promise((resolve, reject) => {
+            db.query(
+                insertText,
+                [id_device, bateria, temperatura, humedad, flat, flon, timestamp, numero_satelites, varianza],
+                (err, res1) => { if (err) resolve(err); else resolve(res1); }
+            );
+        });
         res.statusCode = res_db?.command ? 200 : 503;
         return res.send({});
     }
