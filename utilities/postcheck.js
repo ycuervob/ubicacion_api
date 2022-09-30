@@ -30,11 +30,9 @@ async function postFunction(req, res, next) {
                 (err, res1) => { if (err) resolve(err); else resolve(res1); }
             );
         });
-        res.statusCode = res_db?.command ? 200 : 503;
-        return res.send({});
+        res.statusCode = res_db?.command ? 200 : 400;
     }
 
-    res.statusCode = 400;
     return res.send({});
 }
 
