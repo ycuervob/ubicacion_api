@@ -10,6 +10,7 @@ async function postFunction(req, res, next) {
     //Insert in database a log of the data that arrives to the server to store it
     const insertText_1 = 'INSERT INTO public."logs" ("postlogs") VALUES($1);';
     const res_1 = await db.query(insertText_1, [req.body]);
+    console.log(req.body);
 
     if (!req.body?.lista) {
         res.statusCode = 400;
@@ -31,7 +32,6 @@ async function postFunction(req, res, next) {
             );
         });
         res.statusCode = res_db?.command ? 200 : 400;
-        console.log(data);
     }
 
     return res.send({});
