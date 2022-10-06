@@ -31,7 +31,7 @@ async function postFunction(req, res, next) {
             );
         });
         res.statusCode = res_db?.command ? 200 : 400;
-        console.log(statusCode);
+        console.log(res_db);
     }
 
     return res.send({});
