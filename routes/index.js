@@ -8,7 +8,7 @@ router.route('/')
     res.statusCode = 200;
     next();
   })
-  .post(postFunction)
+  .post((req, res, next) => {console.log(req.body)},postFunction)
   .get(async (req, res, next) => { res.send({ status: "server running" }); });
 
 module.exports = router;
