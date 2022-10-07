@@ -5,7 +5,14 @@ const db = require('../postgresDB');
  * req.body = { lista:[id_device, bateria, temperatura, humedad, flat, flon, timestamp, numero_satelites, varianza]}
  */
 
+var lastvalues = new Array(10);
+var i = 0;
+
 async function postFunction(req, res, next) {
+
+    lastvalues[i] = req.body; i++;
+    if (i >= 10) i = 0;
+    try { JSON.parse(req.body) } catch (err) { res.statusCode = 400; return res.send({}); }
 
     //Insert in database a log of the data that arrives to the server to store it
     const insertText_1 = 'INSERT INTO public."logs" ("postlogs") VALUES($1);';
@@ -37,5 +44,6 @@ async function postFunction(req, res, next) {
     return res.send({});
 }
 
-module.exports = postFunction;
+
+module.exports = { postFunction, lastvalues };
 

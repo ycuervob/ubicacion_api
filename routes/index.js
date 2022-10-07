@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const postFunction = require('../utilities/postcheck');
+const { postFunction, lastvalues } = require('../utilities/postcheck');
+
+router.route('/favicon.ico').get((req, res, next) => { res.send({ data: null }); });
 
 router.route('/')
   .all((req, res, next) => {
@@ -8,9 +10,8 @@ router.route('/')
     res.statusCode = 200;
     next();
   })
-  .post((req, res, next) => {console.log(req.body)},postFunction)
+  .post((req, res, next) => { console.log(req.body) }, postFunction)
   .get(async (req, res, next) => { res.send({ status: "server running" }); });
-
 module.exports = router;
 
 
