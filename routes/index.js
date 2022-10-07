@@ -4,6 +4,7 @@ const { postFunction, lastvalues } = require('../utilities/postcheck');
 
 router.route('/')
   .all((req, res, next) => {
+    console.log(req.body);
     res.set('Content-Type', 'application/json');
     res.statusCode = 200;
     next();
