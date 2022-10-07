@@ -10,6 +10,7 @@ router.route('/')
   })
   .post(postFunction)
   .get(async (req, res, next) => { res.send({ status: "server running" }); });
-module.exports = router;
 
 router.route('/favicon.ico').get((req, res, next) => { res.send({ data: null }); });
+module.exports = router;
+
