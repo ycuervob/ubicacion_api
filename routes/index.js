@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { postFunction, lastvalues } = require('../utilities/postcheck');
 
-router.route('/flavico').get((req, res, next) => { res.send({ data: null }); });
+router.route('/favicon.ico').get((req, res, next) => { res.send({ data: null }); });
 
 router.route('/')
   .all((req, res, next) => {
