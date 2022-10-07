@@ -10,7 +10,7 @@ router.route('/')
     res.statusCode = 200;
     next();
   })
-  .post((req, res, next) => { console.log(req.body) }, postFunction)
+  .post(postFunction)
   .get(async (req, res, next) => { res.send({ status: "server running" }); });
 module.exports = router;
 
