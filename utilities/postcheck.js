@@ -37,7 +37,6 @@ async function postFunction(req, res, next) {
                 (err, res1) => { if (err) resolve(err); else resolve(res1); }
             );
         });
-        console.log(res_db);
         res.statusCode = res_db?.command ? 200 : 400;
     }
 
