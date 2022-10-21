@@ -29,7 +29,7 @@ async function postFunction(req, res, next) {
 
     if (data?.every(element => !(element == null)) == true) {
 
-        const insertText = 'CALL public.insertarlectura($1,$2,$3,$4,$5,$6,$7,$8,$9);';
+        const insertText = 'CALL public.insertarlectura($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13);';
         const res_db = await new Promise((resolve, reject) => {
             db.query(
                 insertText,
@@ -37,6 +37,7 @@ async function postFunction(req, res, next) {
                 (err, res1) => { if (err) resolve(err); else resolve(res1); }
             );
         });
+        console.log(res_db?.err);
         res.statusCode = res_db?.command ? 200 : 400;
     }
 
