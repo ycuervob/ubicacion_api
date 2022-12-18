@@ -23,17 +23,17 @@ async function postFunction(req, res, next) {
         return res.send({});
     }
 
-    const [id_device, bateria, temperatura, humedad, flat, flon, timestamp, numero_satelites, varianza, velocidad, aceleracion_x, aceleracion_y, aceleracion_z, aceleracion_total] = req.body?.lista;
+    const [id_device, bateria, temperatura, humedad, flat, flon, timestamp, numero_satelites, varianza, velocidad, aceleracion_x, aceleracion_y, aceleracion_z, aceleracion_total, temperatura_termmocupla] = req.body?.lista;
     var fecha = new Date(timestamp + "UTC+5");
-    const data = [id_device, bateria, temperatura, humedad, flat, flon, fecha, numero_satelites, varianza, velocidad, aceleracion_x, aceleracion_y, aceleracion_z, aceleracion_total];
+    const data = [id_device, bateria, temperatura, humedad, flat, flon, fecha, numero_satelites, varianza, velocidad, aceleracion_x, aceleracion_y, aceleracion_z, aceleracion_total, temperatura_termmocupla];
 
     if (data?.every(element => !(element == null)) == true) {
 
-        const insertText = 'CALL public.insertarlectura($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14);';
+        const insertText = 'CALL public.insertarlectura($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15);';
         const res_db = await new Promise((resolve, reject) => {
             db.query(
                 insertText,
-                [id_device, bateria, temperatura, humedad, flat, flon, fecha, numero_satelites, varianza, velocidad,aceleracion_x, aceleracion_y, aceleracion_z, aceleracion_total],
+                [id_device, bateria, temperatura, humedad, flat, flon, fecha, numero_satelites, varianza, velocidad,aceleracion_x, aceleracion_y, aceleracion_z, aceleracion_total, temperatura_termmocupla],
                 (err, res1) => { if (err) resolve(err); else resolve(res1); }
             );
         });
