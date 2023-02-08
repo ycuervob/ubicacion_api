@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { postFunction, lastvalues } = require('../utilities/postcheck');
 
+/** GET home page.
+ * @route GET /
+ * @returns {object} 200 - An array of last 10 values registered sended to the api
+ * @returns {Error}  default - Unexpected error
+ * @produces application/json
+ * @consumes application/json 
+*/
 router.route('/')
   .all((req, res, next) => {
     console.log(req.body);
