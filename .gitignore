@@ -1,3 +1,4 @@
 #Ignore node modules
+/database/config/config.json
 /node_modules/
 .env
