@@ -1,5 +1,6 @@
 const lecturaDispositivo = require('../database/models/lecturaDispositivo.js');
 const logs = require('../database/models/logs.js');
+const dispositivo = require('../database/models/dispositivo.js');
 var lastvalues = new Array(10);
 var i = 0;
 
@@ -41,7 +42,15 @@ async function postFunction(req, res, next) {
         var data = req.body?.lista;
         data[6] = new Date(data[6] + "UTC+5");
 
+        //Check if the device exists in the database and update the battery level
+        const dispositivoExists = await dispositivo.findOne({ where: { id_dispositivo: data[0] } });
+        if (!dispositivoExists) {
+            return res.status(400).send({ message: "Bad Request",error: "The device does not exist in the database"});
+        }
+        dispositivoExists.batery = data[1];
+        dispositivoExists.save();
 
+        //Insert the data in the database
         const inserted_lectura = await lecturaDispositivo.create({
             id_dispositivo: data[0],
             temperatura: data[2],
@@ -62,7 +71,7 @@ async function postFunction(req, res, next) {
         //Return a void JSON just to check if the data is correct
         return res.status(200).send({});
     } catch (error) {
-        return res.status(400).send({ message: "Bad Request",error: error?.errors || error});
+        return res.status(400).send({ message: "Bad Request",error: error?.errors || error?.parent?.detail || error?.parent || error});
     }
 }
 
