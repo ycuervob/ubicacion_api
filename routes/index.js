@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { postFunction, lastvalues } = require('../utilities/postcheck');
+const getGroupIndex = require('../utilities/getGroupIndex');
 
 /** GET home page.
  * @route GET /
@@ -17,8 +18,9 @@ router.route('/')
     next();
   })
   .post(postFunction)
-  .get(async (req, res, next) => { res.send({ status: lastvalues }); });
+  .get(getGroupIndex);
 
+router.route('/lastvalues').get(async (req, res, next) => { res.send({ status: lastvalues }); });
 router.route('/favicon.ico').get((req, res, next) => { res.send({ data: null }); });
 module.exports = router;
 
