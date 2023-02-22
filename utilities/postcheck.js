@@ -65,7 +65,8 @@ async function postFunction(req, res, next) {
             aceleracion_y: data[11],
             aceleracion_z: data[12],
             aceleracion_total: data[13],
-            temperatura_termocupla: data[14]
+            temperatura_termocupla: data[14],
+            id_grupo_lectura: data[15]    
         });
 
         //Return a void JSON just to check if the data is correct

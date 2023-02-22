@@ -1,5 +1,6 @@
 const { sequelize, Sequelize } = require('../config/sequelize.js');
 const dispositivo = require('./dispositivo.js');
+const grupoLectura = require('./grupoLectura.js');
 
 const lecturaDispositivo = sequelize.define('lectura_de_dispositivos', {
     id_dispositivo: {
@@ -66,9 +67,18 @@ const lecturaDispositivo = sequelize.define('lectura_de_dispositivos', {
     temperatura_termocupla: {
         type: Sequelize.FLOAT(8),
         allowNull: true
+    },
+    id_grupo_lectura: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'grupo_lectura',
+            key: 'id_grupo_lectura'
+        }
     }
 }
 );
+lecturaDispositivo.belongsTo(grupoLectura, { foreignKey: 'id_grupo_lectura', targetKey: 'id_grupo_lectura' });
 lecturaDispositivo.belongsTo(dispositivo, { foreignKey: 'id_dispositivo', targetKey: 'id_dispositivo' });
 lecturaDispositivo.removeAttribute('id');
 
