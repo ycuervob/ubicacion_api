@@ -4,7 +4,7 @@ const dispositivo = require('./dispositivo.js');
 const grupoLectura = sequelize.define('grupo_lectura', {
     id_grupo_lectura: {
         type: 'int2',
-        allowNull: false,
+        allowNull: true,
         primaryKey: true
     },
     id_dispositivo: {
