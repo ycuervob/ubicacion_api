@@ -70,7 +70,7 @@ const lecturaDispositivo = sequelize.define('lectura_de_dispositivos', {
     },
     id_grupo_lectura: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'grupo_lectura',
             key: 'id_grupo_lectura'

@@ -5,6 +5,7 @@ const grupoLectura = sequelize.define('grupo_lectura', {
     id_grupo_lectura: {
         type: 'int2',
         allowNull: true,
+        defaultValue: 0,
         primaryKey: true
     },
     id_dispositivo: {
